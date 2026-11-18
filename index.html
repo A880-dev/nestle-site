@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nestlé India – Interactive Brand Audit</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪺</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0B1F3A;--navy2:#16315a;--red:#C8102E;--brown:#7A5C45;--bg:#F6F2EC;--card:#fff;--ink:#1b2433;--mute:#5d6676;--line:#e4dccf;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0a1730;--card:#12274a;--ink:#eef1f6;--mute:#aab4c6;--line:#243a63}}
+*{box-sizing:border-box}html,body{margin:0}html{scroll-padding-top:70px}
+body{font:16px/1.65 Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.2;margin:0 0 .5em}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--navy);display:flex;align-items:center;gap:6px;padding:10px 16px;flex-wrap:wrap;border-bottom:3px solid var(--red)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--navy);z-index:10}
+nav b{color:#fff;font:700 18px Fraunces,serif;margin-right:auto}nav a{color:#d8e0ee;text-decoration:none;padding:7px 12px;border-radius:8px;font-size:14px}
+nav a.on,nav a:hover{background:rgba(255,255,255,.12);color:#fff}nav a.ask{background:var(--red);color:#fff}
+main{max-width:1060px;margin:0 auto;padding:24px 16px 60px}
+.hero{background:var(--navy);color:#fff;border-radius:18px;padding:44px 28px;border-left:8px solid var(--red)}
+.hero small{letter-spacing:.14em;color:#e9b9c0;font-weight:600}.hero h1{font-size:clamp(32px,6vw,54px);margin:.2em 0}
+.hero h3{font-weight:600;color:#d8c3a8;font-size:20px}.hero p{max-width:640px;color:#cfd8e8}
+.btn{display:inline-block;border:0;cursor:pointer;background:var(--red);color:#fff;padding:11px 20px;border-radius:10px;font:600 15px Inter,sans-serif;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;margin-top:26px}
+.tile{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--brown);border-radius:12px;padding:18px;text-decoration:none;color:inherit;transition:transform .15s,border-color .15s}
+.tile:hover,.tile:focus-visible{transform:translateY(-3px);border-top-color:var(--red)}.tile span{font-size:26px}.tile h3{font-size:17px;margin:.4em 0 .2em}.tile p{margin:0;color:var(--mute);font-size:14px}
+.note{font-size:13px;color:var(--mute);margin-top:30px;border-top:1px solid var(--line);padding-top:14px}
+.page h1{font-size:clamp(28px,5vw,40px)}.lead{font-size:18px;color:var(--mute);max-width:760px}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;margin:16px 0}.sec h2{font-size:21px;color:var(--red)}
+.sec ul{padding-left:20px;margin:.4em 0}.sec li{margin:.35em 0}
+.wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;min-width:520px}th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}th{background:var(--navy);color:#fff}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}.pc{border:1px solid var(--line);border-left:5px solid var(--red);border-radius:10px;padding:12px;background:var(--bg)}.pc b{font-family:Fraunces,serif;font-size:18px}.pc p{margin:.3em 0 0;font-size:14px;color:var(--mute)}
+.tree{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}.node{background:var(--navy);color:#fff;padding:10px 18px;border-radius:10px;font-weight:600}.node.r{background:var(--red)}
+.row{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}.col{background:var(--bg);border:1px solid var(--line);border-top:4px solid var(--brown);border-radius:10px;padding:10px 12px;min-width:150px;font-size:14px}.col b{display:block;margin-bottom:4px}
+.swot{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}.swot>div{border-radius:10px;padding:14px;background:var(--bg);border:1px solid var(--line)}.swot h3{font-size:17px}
+.back{margin-bottom:14px}
+.chatbox{background:var(--card);border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;height:min(62vh,560px);margin-top:16px}
+#log{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
+.m{max-width:88%;padding:11px 14px;border-radius:14px;font-size:15px;white-space:pre-wrap;word-wrap:break-word}.m.u{align-self:flex-end;background:var(--navy);color:#fff}.m.a{background:var(--bg);border:1px solid var(--line)}.m.e{background:#fdeaec;color:#8a0b1f;border:1px solid #f2b6bf}
+.dots span{display:inline-block;width:7px;height:7px;margin-right:4px;border-radius:50%;background:var(--red);animation:b 1s infinite}.dots span:nth-child(2){animation-delay:.15s}.dots span:nth-child(3){animation-delay:.3s}@keyframes b{50%{opacity:.2}}
+.sug{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.sug button{background:var(--card);border:1px solid var(--line);color:var(--ink);padding:8px 12px;border-radius:20px;cursor:pointer;font:14px Inter,sans-serif}.sug button:hover{border-color:var(--red)}
+.inp{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line)}.inp input{flex:1;min-width:0;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:15px Inter,sans-serif}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<nav><b>Nestlé India · Brand Audit</b><a href="#home" data-n="home">Home / Dashboard</a><a href="#ask" class="ask" data-n="ask">Ask AI Assistant</a><a href="#about" data-n="about">About This Project</a></nav>
+<main id="app"></main>
+<script>
+const L=(h,u)=>({h,u}),T=(h,t)=>({h,t}),P=(h,p)=>({h,p});
+const PAGES=[
+["company","🏢","Company Overview","What Nestlé India does and how it is organised",
+"Nestlé India Limited is the Indian subsidiary of Nestlé S.A. (Switzerland) and one of India’s best-known packaged food and beverage companies, listed on the Indian stock exchanges.",
+[L("What it does",["Manufactures and markets food, beverages and nutrition products for Indian households.","Sells through a very large network of distributors and retailers, plus e-commerce and quick-commerce."]),
+T("Major business categories",[["Category","Example brands"],["Milk products and nutrition","NESTLÉ A+, MILKMAID, EVERYDAY, NESTLÉ Dahi, CERELAC, NAN"],["Prepared dishes and cooking aids","MAGGI noodles, sauces, masalas, MAGGI Cuppa"],["Powdered and liquid beverages","NESCAFÉ, NESTEA"],["Chocolate and confectionery","KITKAT, MUNCH, BAR-ONE, MILKYBAR"]]),
+L("Business model",["Branded fast-moving consumer goods (FMCG): local manufacturing, mass distribution, strong brand-building.","Adapts global know-how to Indian tastes (e.g., masala flavours, affordable pack sizes).","Sources milk directly from farmers in dairy districts such as Moga (Punjab) and runs a long-term farmer-linked supply chain."]),
+L("Relationship with Nestlé S.A.",["Nestlé S.A. is the promoter and majority shareholder (roughly 62.76%; verify latest filing).","Gets global brands, R&D, technology and quality standards; pays royalty and technical-assistance fees as disclosed in annual reports.","Operates as a separately listed Indian company with its own board."])]],
+["history","📜","History and Evolution","From imports in 1912 to a local manufacturing leader",
+"Nestlé’s link with India is more than a century old. It began with imports and grew into local manufacturing and Indian-market product development.",
+[T("Key milestones (verify exact dates in company sources)",[["Period","Milestone"],["1912","Nestlé begins trading in India, importing products such as condensed milk and chocolates."],["1959","Indian company set up as a local entity (later Nestlé India Limited)."],["1961","First factory at Moga, Punjab, starting with milk products; dairy farmer partnership begins."],["1960s–70s","NESCAFÉ and other beverage activity; additional plants such as Choladi (Tamil Nadu)."],["1983","MAGGI 2-Minute Noodles launched in India."],["1990s–2000s","More factories (e.g., Nanjangud, Samalkha, Ponda, Pantnagar); KITKAT, MUNCH and CERELAC grow."],["2015","MAGGI withdrawn after regulatory action in June and relaunched later that year."],["2010s–today","New categories, digital selling and premium launches."]]),
+P("Evolution","The company moved from importer to local manufacturer, then to a portfolio built around Indian habits: tea-time, school tiffin, infant nutrition and quick meals.")]],
+["portfolio","🍜","Product Portfolio","The brands behind the corporate name",
+"The portfolio mixes global brands and India-specific products. Photos are not used here; add official images later if the university permits.",
+[{h:"Key brands",x:"cards",c:[["MAGGI","Instant noodles, masalas and sauces. Core category; strong ‘2-minute’ habit."],["NESCAFÉ","Instant coffee (Classic, Sunrise, Gold). Strong coffee-habit builder."],["KITKAT","Chocolate wafer. ‘Have a break’ positioning."],["MILKMAID","Sweetened condensed milk for desserts and home cooking."],["EVERYDAY","Dairy whitener for tea and coffee, a tea-culture brand."],["CERELAC","Infant cereal for babies from around 6 months."],["NAN","Infant formula (e.g., NAN PRO); medically sensitive category."],["Other Indian brands","NESTLÉ A+ milk and Dahi, MUNCH, BAR-ONE, MILKYBAR, NESTEA, Nestlé Slim."]]}]],
+["architecture","🏛️","Brand Architecture","A ‘branded house’ with strong product brands",
+"Nestlé uses the corporate name as an endorsement across many individually powerful product brands. This blends a branded house with a house of brands.",
+[{h:"Architecture diagram",x:"tree"},L("How to read it",["Corporate brand: Nestlé stands for trust, quality and nutrition, and appears as an endorsement.","Master brands: MAGGI, NESCAFÉ and KITKAT carry the most equity.","Sub-brands/variants: MAGGI Masala, NESCAFÉ Sunrise, NAN PRO are tailored to segments.","Benefit: trust transfers to new launches; risk: a crisis in one brand can affect the corporate name (as seen in 2015)."])]],
+["stp","🎯","STP Strategy","Segmentation, targeting, positioning",
+"STP means dividing the market into groups, choosing which to serve and deciding how the brand should be seen.",
+[T("STP by brand (interpretive)",[["Brand","Segmentation","Targeting","Positioning"],["MAGGI","Quick-meal seekers; kids, students, young families","Mass market, value packs","Fast, tasty, comforting ‘2-minute’ meal"],["NESCAFÉ","Coffee drinkers by occasion and income","Urban youth and professionals; growing smaller towns","Energy, lifestyle and everyday coffee"],["KITKAT","Snackers; teens, young adults","Youth in urban and semi-urban India","The break moment"],["CERELAC / NAN","Parents by baby’s age","Mothers of infants","Trusted nutrition and science"],["EVERYDAY","Tea-drinking households","Mass households","Richer, creamier tea"]]),
+P("Note","Segments above are the author’s interpretation based on public brand communication, not official Nestlé statements.")]],
+["identity","🪪","Brand Identity and Positioning","What Nestlé India stands for",
+"Brand identity is how the company wants to be seen; positioning is the place it wants to hold in consumers’ minds.",
+[L("Identity and personality",["Warm, caring, trustworthy and family-oriented.","Visual cues: red-and-white corporate identity, nest symbol, familiar product packaging."]),
+L("Values and associations",["Nutrition, quality, safety, good food, good life.","Associations: childhood memories, comfort food, dependable everyday brands."]),
+P("Brand promise","Good food that supports healthier, happier lives, delivered with consistent quality."),
+L("Differentiation",["Global science and quality systems combined with local taste.","Multiple category-leading brands under one trusted umbrella.","Challenge: health and ‘processed food’ perceptions."])]],
+["equity","🔺","Customer-Based Brand Equity","Keller’s brand-building pyramid",
+"Keller’s CBBE model shows how brands build equity from the base (salience) to the top (resonance). The ratings below are illustrative interpretations.",
+[T("Keller’s six building blocks applied",[["Block","Meaning","Nestlé example"],["Salience","Awareness and recall","MAGGI is strongly linked with instant noodles"],["Performance","Product quality and function","NESCAFÉ taste; CERELAC nutrition credentials"],["Imagery","Intangible user and usage associations","KITKAT = a break; MAGGI = childhood nostalgia"],["Judgments","Quality, credibility, consideration","Trust in Nestlé as a parent brand"],["Feelings","Emotional reactions","Warmth, comfort, nostalgia"],["Resonance","Loyalty and attachment","MAGGI’s return after 2015 suggests strong loyalty (interpretation)"]])]],
+["mix","🧩","Marketing Mix","Product, price, place, promotion",
+"The 4Ps show how Nestlé India turns strategy into market action.",
+[T("4Ps with examples",[["P","Approach","Example"],["Product","Wide range, local adaptation","MAGGI Masala; NESCAFÉ Sunrise (coffee-chicory blend)"],["Price","Entry price points plus premium tiers","Small sachets and low-priced packs; NESCAFÉ Gold premium"],["Place","Mass distribution and online","General trade, modern trade, e-commerce, quick commerce"],["Promotion","TV, digital, in-store, sampling","MAGGI and KITKAT campaigns; festival promotions"]]),P("Note","Check current prices and pack sizes before quoting them.")]],
+["ads","📺","Advertising and Campaigns","Messages, insights and creative approach",
+"Nestlé India advertising builds on simple consumer insights tied to everyday moments.",
+[T("Selected campaigns (verify wording and years)",[["Brand","Campaign idea","Insight / approach"],["KITKAT","‘Have a break, have a KitKat’","Everyone needs a pause; snack as a break"],["MAGGI","‘2-minute’ promise; ‘Me and Meri MAGGI’ (relaunch era)","Nostalgia, emotional bond with the brand"],["NESCAFÉ","Coffee as energy and sociability","Coffee moments with friends and work"],["MILKMAID","Dessert and festive cooking","Making home-cooked sweets simpler"]]),
+L("What to analyse",["Objectives: awareness, trial, loyalty, trust repair.","Targets: kids and families (MAGGI), youth (KITKAT, NESCAFÉ), parents (CERELAC).","Creative style: warm, relatable, family- and friend-centred."])]],
+["digital","📱","Digital Marketing","Social, content and online selling",
+"Digital channels help Nestlé India reach young consumers, test content and sell directly online.",
+[L("Activities (check current pages for specifics)",["Active brand pages on Instagram, YouTube and Facebook (MAGGI, NESCAFÉ, KITKAT and others).","Recipe and food-hack content, especially for MAGGI and MILKMAID.","Short video and festive digital campaigns.","Presence on e-commerce and quick-commerce platforms; a company-owned online store exists (verify).","Influencer collaborations: only cite specific ones that you can verify."]),
+P("Engagement","Likes, shares and followers should be gathered fresh from the platforms; do not rely on remembered numbers.")]],
+["competitors","⚔️","Competitor Analysis","Rivals across categories",
+"Nestlé India competes with different players in each category rather than one rival overall.",
+[T("Competitors by category",[["Category","Main competitors","Comparison"],["Noodles","Yippee (ITC), Top Ramen (Nissin), Ching’s (Capital Foods), Wai Wai","MAGGI leads on brand trust and habit"],["Coffee","Bru (HUL), Tata Coffee, Continental","NESCAFÉ stronger in premium and brand image"],["Chocolates","Cadbury (Mondelez), Ferrero, Amul","Cadbury has strong mass presence; KITKAT in wafer niche"],["Dairy","Amul, Mother Dairy, Britannia","Strong local dairy and price competition"],["Infant nutrition","Danone, Abbott, Mead Johnson","Trust and science credibility are key"]]),P("Note","Market-share figures are not given here; use a verified source before including any.")]],
+["innovation","💡","Brand Extensions and Innovation","Growing existing brands and launching new ones",
+"Extensions use existing brand equity to enter new segments; innovation adapts products to Indian needs.",
+[L("Extensions",["MAGGI: noodles → masalas, sauces, cuppa noodles, variants.","NESCAFÉ: Classic → Sunrise, Gold, ready-to-drink options.","KITKAT: flavours and festive packs."]),
+L("Adaptation to India",["Masala and regional flavours; low-unit-price sachets.","Fortified products and nutrition messaging (e.g., iron, protein).","Festive gifting packs and tailored dairy products."]),
+P("Innovation lens","Look for packaging changes, health-oriented variants and new categories; verify latest launches on the official website.")]],
+["swot","🧭","SWOT Analysis","Internal strengths and weaknesses; external opportunities and threats",
+"This SWOT is the author’s analysis based on public information.",
+[{h:"SWOT",x:"swot",c:[["Strengths",["Highly trusted, familiar brands","Parent-company R&D and quality systems","Wide distribution","Strong dairy supply chain"]],["Weaknesses",["Dependence on a few big brands","‘Processed food’ health image","Product-safety crisis history","Higher price than local rivals"]],["Opportunities",["Rising incomes and smaller-town growth","E-commerce and quick-commerce","Healthier and premium products","Rising coffee habit"]],["Threats",["Regulatory scrutiny","Local and D2C competitors","Input-cost inflation","Changing health preferences"]]]}]],
+["findings","✅","Findings and Recommendations","What the audit suggests",
+"These conclusions are interpretive and should be supported with the team’s own research.",
+[L("Major findings",["Strong brand equity built on trust, habit and distribution.","Well-structured portfolio with strong anchor brands.","2015 showed both vulnerability and resilience."]),
+L("Gaps",["Health perception of some categories.","Limited verified public data on digital performance.","Dependence on key categories."]),
+L("Recommendations",["Expand healthier and fortified ranges with clear communication.","Deepen digital content and regional-language engagement.","Strengthen crisis-readiness and transparent quality communication.","Grow in smaller towns with value packs and local flavours."]),
+P("Overall assessment","A strong, trusted brand with healthy equity; the main task is staying relevant to health-conscious and digital-first consumers.")]]
+];
+const $=s=>document.querySelector(s),app=$("#app");
+const esc=s=>String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const ul=a=>"<ul>"+a.map(x=>"<li>"+x+"</li>").join("")+"</ul>";
+const tbl=t=>'<div class="wrap"><table><tr>'+t[0].map(h=>"<th>"+h+"</th>").join("")+"</tr>"+t.slice(1).map(r=>"<tr>"+r.map(c=>"<td>"+c+"</td>").join("")+"</tr>").join("")+"</table></div>";
+function sec(s){let b="";
+ if(s.x=="cards")b='<div class="cards">'+s.c.map(c=>`<div class="pc"><b>${c[0]}</b><p>${c[1]}</p></div>`).join("")+"</div>";
+ else if(s.x=="swot")b='<div class="swot">'+s.c.map(c=>`<div><h3>${c[0]}</h3>${ul(c[1])}</div>`).join("")+"</div>";
+ else if(s.x=="tree")b=`<div class="tree"><div class="node r">Nestlé (corporate brand · endorser)</div><div class="row">`+
+  [["Beverages","NESCAFÉ · NESTEA"],["Prepared foods","MAGGI"],["Confectionery","KITKAT · MUNCH · BAR-ONE · MILKYBAR"],["Dairy","MILKMAID · EVERYDAY · A+ · Dahi"],["Nutrition","CERELAC · NAN · Lactogen"]].map(c=>`<div class="col"><b>${c[0]}</b>${c[1]}</div>`).join("")+"</div></div>";
+ else if(s.t)b=tbl(s.t);else if(s.u)b=ul(s.u);else b="<p>"+s.p+"</p>";
+ return `<section class="sec"><h2>${s.h}</h2>${b}</section>`}
+function home(){app.innerHTML=`<div class="hero"><small>NESTLÉ INDIA</small><h1>Explore the World of Nestlé</h1><h3>An Interactive Brand Audit</h3><p>Explore Nestlé India’s company background, product portfolio, brand strategy, marketing activities and competitive position, or ask the AI Assistant a question.</p><a class="btn" href="#ask">Ask the Nestlé AI Assistant</a></div>
+<div class="grid">${PAGES.map(p=>`<a class="tile" href="#${p[0]}"><span>${p[1]}</span><h3>${p[2].toUpperCase()}</h3><p>${p[3]}</p></a>`).join("")}</div>
+<p class="note">Academic project for an MBA brand audit. This is not an official Nestlé website and is not affiliated with Nestlé.</p>`}
+function page(p){app.innerHTML=`<div class="page"><a class="btn ghost back" href="#home">← Back to dashboard</a><h1>${p[1]} ${p[2]}</h1><p class="lead">${p[4]}</p>${p[5].map(s=>sec(s)).join("")}<p class="note">Academic project, not an official Nestlé website. Verify dates and figures with Nestlé India’s annual reports and official website.</p><a class="btn ghost" href="#home">← Back to dashboard</a></div>`}
+function about(){app.innerHTML=`<div class="page"><h1>About This Project</h1><p class="lead">An MBA-level brand audit of Nestlé India Limited, presented as an interactive website.</p><section class="sec"><h2>Project team: Group 1</h2><div class="wrap"><table><tr><th>No.</th><th>Name</th><th>BSP number</th></tr><tr><td>1</td><td>Astha Jain</td><td>25BSP1640</td></tr><tr><td>2</td><td>Aishwarya Patil</td><td>25BSP0965</td></tr><tr><td>3</td><td>Rohit Agnani</td><td>25BSP2360</td></tr><tr><td>4</td><td>Affan</td><td>25BSP1375</td></tr><tr><td>5</td><td>Tulika</td><td>25BSP0188</td></tr></table></div><h3 style="margin-top:18px">Faculty guide</h3><p>Prof. Anand Limaye</p></section><section class="sec"><h2>Purpose</h2><p>To explain Nestlé India’s brand strategy, marketing and competitive position in an easy-to-explore format.</p></section><section class="sec"><h2>Important notes</h2>${ul(["This is an academic project and not an official Nestlé website.","Information pages are static summaries from public knowledge; some dates and figures should be verified.","The AI Assistant uses Google’s Gemini API through a secure server function. AI answers may contain mistakes; verify important facts."])}</section></div>`}
+const SUG=["What is Nestlé India’s business model?","Explain Nestlé India’s brand architecture.","Why is MAGGI positioned differently from NESCAFÉ?","Explain Keller’s model using Nestlé.","What are Nestlé India’s major competitors?","What are the strengths and weaknesses of Nestlé India?","Analyse Nestlé India’s marketing mix.","What recommendations would you give Nestlé India?"];
+let chat=[],busy=false;
+function md(t){return esc(t).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(/^\s*[*-] /gm,"• ").replace(/^#+ (.*)$/gm,"<b>$1</b>")}
+function ask(){app.innerHTML=`<div class="page"><h1>Ask the Nestlé AI Assistant</h1><p class="lead">Have a question about Nestlé India? Ask away.</p>
+<div class="sug">${SUG.map((s,i)=>`<button data-i="${i}">${s}</button>`).join("")}</div>
+<div class="chatbox"><div id="log"></div><div class="inp"><input id="q" placeholder="Type your question…" aria-label="Your question" autocomplete="off"><button class="btn" id="send">Send</button><button class="btn ghost" id="new">New chat</button></div></div>
+<p class="note">AI answers may be inaccurate. Verify key facts. Academic project, not an official Nestlé channel.</p></div>`;
+ $("#send").onclick=()=>send($("#q").value);$("#q").onkeydown=e=>{if(e.key==="Enter")send($("#q").value)};
+ $("#new").onclick=()=>{chat=[];draw()};document.querySelectorAll(".sug button").forEach(b=>b.onclick=()=>send(SUG[b.dataset.i]));draw()}
+function draw(extra){const l=$("#log");if(!l)return;l.innerHTML=(chat.length?"":'<div class="m a">Hello! Ask me anything about Nestlé India’s brands, strategy or marketing, or tap a suggested question above.</div>')+chat.map(m=>`<div class="m ${m.role==="user"?"u":"a"}">${m.role==="user"?esc(m.content):md(m.content)}</div>`).join("")+(extra||"");l.scrollTop=l.scrollHeight}
+async function send(t){t=(t||"").trim();if(!t||busy)return;busy=true;$("#q").value="";chat.push({role:"user",content:t});draw('<div class="m a dots"><span></span><span></span><span></span></div>');
+ try{const r=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:chat})});
+  let d={};try{d=await r.json()}catch(e){}
+  if(!r.ok||!d.reply)throw new Error(d.error||"The AI service is not reachable.");
+  chat.push({role:"assistant",content:d.reply});draw()}
+ catch(e){draw('<div class="m e">The assistant could not answer: '+esc(e.message)+' In this preview the AI server is not connected; it works once the site is published with your Gemini key. The rest of the site works normally.</div>')}
+ busy=false}
+function route(){const h=(location.hash||"#home").slice(1),p=PAGES.find(x=>x[0]===h);
+ document.querySelectorAll("nav a[data-n]").forEach(a=>a.classList.toggle("on",a.dataset.n===(p?"home":h)));
+ if(h==="ask")ask();else if(h==="about")about();else if(p)page(p);else home();scrollTo(0,0)}
+addEventListener("hashchange",route);route();
+</script></body></html>
