@@ -13,7 +13,7 @@ exports.handler = async (event) => {
       role: m.role === "assistant" ? "model" : "user",
       parts: [{ text: String(m.content).slice(0, 4000) }],
     }));
-    const r = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent", {
+    const r = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent", {
       method: "POST",
       headers: { "Content-Type": "application/json", "x-goog-api-key": key },
       body: JSON.stringify({
