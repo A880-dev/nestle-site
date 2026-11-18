@@ -13,19 +13,30 @@ exports.handler = async (event) => {
       role: m.role === "assistant" ? "model" : "user",
       parts: [{ text: String(m.content).slice(0, 4000) }],
     }));
-    const r = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "x-goog-api-key": key },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: SYSTEM }] },
-        contents,
-        generationConfig: { temperature: 0.4, maxOutputTokens: 4000, thinkingConfig:{ thinkingLevel: "low" } },
-      }),
-    });
-    const data = await r.json();
-    if (!r.ok) return { statusCode: r.status, body: JSON.stringify({ error: data.error?.message || "Gemini error" }) };
-    const reply = data.candidates?.[0]?.content?.parts?.map((p) => p.text).join("") || "";
-    return { statusCode: 200, headers: { "Content-Type": "application/json" }, body: JSON.stringify({ reply }) };
+    const MODELS = ["gemini-flash-latest", "gemini-flash-lite-latest", "gemini-3-flash-preview"];
+    let lastError = "The AI service is busy. Please try again in a minute.";
+    for (const model of MODELS) {
+      try {
+        const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "x-goog-api-key": key },
+          signal: AbortSignal.timeout(4500),
+          body: JSON.stringify({
+            systemInstruction: { parts: [{ text: SYSTEM }] },
+            contents,
+            generationConfig: { temperature: 0.4, maxOutputTokens: 4000 },
+          }),
+        });
+        const data = await r.json();
+        if (!r.ok) { lastError = data.error?.message || "Gemini error"; continue; }
+        const reply = data.candidates?.[0]?.content?.parts?.map((p) => p.text).join("") || "";
+        if (reply) return { statusCode: 200, headers: { "Content-Type": "application/json" }, body: JSON.stringify({ reply }) };
+        lastError = "The model returned an empty answer. Please try again.";
+      } catch (err) {
+        lastError = "The AI service took too long. Please try again.";
+      }
+    }
+    return { statusCode: 503, body: JSON.stringify({ error: lastError }) };
   } catch (e) {
     return { statusCode: 500, body: JSON.stringify({ error: "Server error: " + e.message }) };
   }
