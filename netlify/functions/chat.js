@@ -19,7 +19,7 @@ exports.handler = async (event) => {
       body: JSON.stringify({
         systemInstruction: { parts: [{ text: SYSTEM }] },
         contents,
-        generationConfig: { temperature: 0.4, maxOutputTokens: 1500 },
+        generationConfig: { temperature: 0.4, maxOutputTokens: 4000, thinkingConfig:{ thinkingLevel: "low" } },
       }),
     });
     const data = await r.json();
