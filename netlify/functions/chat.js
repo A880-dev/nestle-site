@@ -33,7 +33,7 @@ exports.handler = async (event) => {
       role: m.role === "assistant" ? "model" : "user",
       parts: [{ text: String(m.content).slice(0, 4000) }],
     }));
-    const MODELS = ["gemini-flash-latest", "gemini-flash-lite-latest", "gemini-3-flash-preview"];
+    const MODELS = ["gemini-3-flash-preview", "gemini-flash-lite-latest", "gemini-flash-latest"];
     const t0 = Date.now();
     let lastError = "The AI service is busy. Please try again in a minute.";
     for (const model of MODELS) {
@@ -41,11 +41,11 @@ exports.handler = async (event) => {
         const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
           method: "POST",
           headers: { "Content-Type": "application/json", "x-goog-api-key": key },
-          signal: AbortSignal.timeout(Math.max(3000, Math.min(25000, 45000 - (Date.now() - t0)))),
+          signal: AbortSignal.timeout(Math.max(3000, Math.min(12000, 40000 - (Date.now() - t0)))),
           body: JSON.stringify({
             systemInstruction: { parts: [{ text: SYSTEM }] },
             contents,
-            generationConfig: { temperature: 0.4, maxOutputTokens: 3000, thinkingConfig: { thinkingLevel: "low" } },
+            generationConfig: model.includes("3-flash") ? { temperature: 0.4, maxOutputTokens: 3000, thinkingConfig: { thinkingLevel: "low" } } : { temperature: 0.4, maxOutputTokens: 3000 },
           }),
         });
         const data = await r.json();
